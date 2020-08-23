@@ -8,15 +8,15 @@ f = None
 def on_message(ws, message):
     j_msg = json.dumps(message)
     string = ""
-    string += j_msg["sensor"]["acc"]["x"]
-    string += j_msg["sensor"]["acc"]["y"]
-    string += j_msg["sensor"]["acc"]["z"]
-    string += j_msg["sensor"]["gyro"]["x"]
-    string += j_msg["sensor"]["gyro"]["y"]
-    string += j_msg["sensor"]["gyro"]["z"]
-    string += j_msg["sensor"]["mag"]["x"]
-    string += j_msg["sensor"]["mag"]["y"]
-    string += j_msg["sensor"]["mag"]["z"]
+    string += j_msg["acc"]["x"]
+    string += j_msg["acc"]["y"]
+    string += j_msg["acc"]["z"]
+    string += j_msg["gyro"]["x"]
+    string += j_msg["gyro"]["y"]
+    string += j_msg["gyro"]["z"]
+    string += j_msg["mag"]["x"]
+    string += j_msg["mag"]["y"]
+    string += j_msg["mag"]["z"]
     string += "\n"
     f.write(string)
 
