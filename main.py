@@ -6,33 +6,44 @@ import json
 f = None
 
 def on_message(ws, message):
-    j_msg = json.dumps(message)
+    global f
+    j_msg = json.loads(message)
     string = ""
-    string += j_msg["acc"]["x"]
-    string += j_msg["acc"]["y"]
-    string += j_msg["acc"]["z"]
-    string += j_msg["gyro"]["x"]
-    string += j_msg["gyro"]["y"]
-    string += j_msg["gyro"]["z"]
-    string += j_msg["mag"]["x"]
-    string += j_msg["mag"]["y"]
-    string += j_msg["mag"]["z"]
+    string += str(j_msg["acceleration"]["x"]) + ","
+    string += str(j_msg["acceleration"]["y"]) + ","
+    string += str(j_msg["acceleration"]["z"]) + ","
+    string += str(j_msg["gyro"]["x"]) + ","
+    string += str(j_msg["gyro"]["y"]) + ","
+    string += str(j_msg["gyro"]["z"]) + ","
+    string += str(j_msg["magnetism"]["x"]) + ","
+    string += str(j_msg["magnetism"]["y"]) + ","
+    string += str(j_msg["magnetism"]["z"]) + ","
     string += "\n"
+
+    if f is None:
+        print("No file io")
+        return
     f.write(string)
 
+
 def on_close(ws):
+    global f
     if f is None:
-      return
+        return
     f.close()
 
+
 def on_open(ws):
+    global f
     ut = time.time()
-    f = open(str(ut),'w')
+    f = open(str(ut), 'w')
+
 
 if __name__ == "__main__":
     websocket.enableTrace(True)
     ws = websocket.WebSocketApp(sys.argv[1],
-                              on_message = on_message,
-                              on_close = on_close)
+                                on_open=on_open,
+                                on_message=on_message,
+                                on_close=on_close)
     ws.on_open = on_open
     ws.run_forever()
