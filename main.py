@@ -5,6 +5,7 @@ import json
 
 f = None
 
+
 def on_message(ws, message):
     global f
     j_msg = json.loads(message)
@@ -17,7 +18,7 @@ def on_message(ws, message):
     string += str(j_msg["gyro"]["z"]) + ","
     string += str(j_msg["magnetism"]["x"]) + ","
     string += str(j_msg["magnetism"]["y"]) + ","
-    string += str(j_msg["magnetism"]["z"]) + ","
+    string += str(j_msg["magnetism"]["z"])
     string += "\n"
 
     if f is None:
