@@ -37,7 +37,7 @@ def on_close(ws):
 def on_open(ws):
     global f
     ut = time.time()
-    f = open(str(ut), 'w')
+    f = open(str(ut) + ".log", 'w')
 
 
 if __name__ == "__main__":
